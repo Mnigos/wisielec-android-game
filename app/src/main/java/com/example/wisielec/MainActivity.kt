@@ -18,12 +18,12 @@ class MainActivity : AppCompatActivity() {
         btnPlay.setOnClickListener {
             val intent = Intent(this, GameActivity::class.java)
             val word = editWord.text.toString()
-            editWord.text = null
             intent.putExtra("key", word)
+            editWord.text = null
             startActivity(intent)
         }
 
-        btnEnd.setOnClickListener{
+        btnEnd.setOnClickListener {
             finishAffinity()
         }
     }

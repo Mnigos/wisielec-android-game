@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.* // ktlint-disable no-wildcard-imports
 import androidx.appcompat.app.AppCompatActivity
+import java.lang.NullPointerException
 import java.util.* // ktlint-disable no-wildcard-imports
 import kotlin.text.StringBuilder
 
@@ -38,16 +39,17 @@ class GameActivity : AppCompatActivity() {
 
         val stringBuilder = StringBuilder()
 
-        keyWord = Intent().getStringExtra("key").toString()
+        keyWord = intent.getStringExtra("key").toString()
         img = findViewById(R.id.img_hangman)
+
+        for (i in keyWord.indices) {
+            stringBuilder.append("*")
+        }
+
         tvWord = findViewById(R.id.txt_word)
         tvTmp = findViewById(R.id.txt_tmp)
         tvWord.text = stringBuilder
-        tvTmp.text = "Len = ${keyWord.length}"
-
-        for (i in 0..keyWord.length) {
-            stringBuilder.append("*")
-        }
+        tvTmp.text = "Len = $keyWord"
 
         val buttonThree = findViewById<Button>(R.id.btn_end_hma)
 
@@ -62,7 +64,7 @@ class GameActivity : AppCompatActivity() {
     private fun setButtons() {
         val tableLayout = findViewById<TableLayout>(R.id.tableLayout)
 
-        for (i in 0..chars.length) {
+        for (i in chars.indices) {
             val char = chars[i]
             val button = Button(this)
             button.text = char.toString().toUpperCase(Locale.ROOT)
@@ -102,9 +104,10 @@ class GameActivity : AppCompatActivity() {
 
     private fun showLetter(char: Char) {
         val tv = tvWord.text.toString().toCharArray()
-        for (i in 0..tv.size) {
-            if (keyWord[i] == char) tv[i] == char
+        for (i in tv.indices) {
+            if (keyWord[i] == char) tv[i] = char
         }
+        tvWord.text = String(tv)
     }
 
     private fun drawNextHangManElement() {
