@@ -83,7 +83,7 @@ class GameActivity : AppCompatActivity() {
         val isHiddenLetter = tvWord.text.toString().indexOf('*') == -1
         val isLastStage = stage == imgResources.size - 1
 
-        //@TODO: add drawNextHangMan() showLetter() methods
+        //@TODO: add drawNextHangMan() methods
         if (isHiddenLetter) win()
         if (isLastStage) lose()
         if (index < 0) drawNextHangManElement()
@@ -100,5 +100,12 @@ class GameActivity : AppCompatActivity() {
     private fun win() {
         tvTmp.text = "You Win!"
         img.setImageResource(R.drawable.ic_win)
+    }
+
+    private fun showLetter(char: Char) {
+        val tv = tvWord.text.toString().toCharArray()
+        for (i in 0..tv.size) {
+            if (keyWord[i] == char) tv[i] == char
+        }
     }
 }
