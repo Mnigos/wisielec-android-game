@@ -23,8 +23,8 @@ class GameActivity : AppCompatActivity() {
     )
 
     private val chars = "abcdefghijklmnoprstuqwxyz"
-    var stage = 0
-    var end = false
+    private var stage = 0
+    private var end = false
     private lateinit var keyWord: String
     private lateinit var img: ImageView
     private lateinit var tvWord: TextView
