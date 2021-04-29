@@ -3,6 +3,7 @@ package com.example.wisielec
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
@@ -68,10 +69,24 @@ class GameActivity : AppCompatActivity() {
             button.text = char.toString().toUpperCase(Locale.ROOT)
             button.textSize = 20F
             button.id = i
-            // @TODO: add letterAction method
-            button.setOnClickListener(letterAction(char))
+            button.setOnClickListener{
+                letterAction(char)
+            }
             tableRow = tableLayout.getChildAt(i / 5) as TableRow
             tableRow.addView(button)
         }
+    }
+
+    private fun letterAction(char: Char) {
+        if (end) return
+        val index = keyWord.indexOf(char)
+        val isHiddenLetter = tvWord.text.toString().indexOf('*') == -1
+        val isLastStage = stage == imgResources.size - 1
+
+        //@TODO: add win() lose() drawNextHangMan() showLetter() methods
+        if (isHiddenLetter) win()
+        if (isLastStage) lose()
+        if (index < 0) drawNextHangManElement()
+        else showLetter(char)
     }
 }
