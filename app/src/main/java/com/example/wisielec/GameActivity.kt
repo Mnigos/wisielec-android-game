@@ -81,13 +81,14 @@ class GameActivity : AppCompatActivity() {
     private fun letterAction(char: Char) {
         if (end) return
         val index = keyWord.indexOf(char)
-        val isHiddenLetter = tvWord.text.toString().indexOf('*') == -1
-        val isLastStage = stage == imgResources.size - 1
 
-        if (isHiddenLetter) win()
-        if (isLastStage) lose()
         if (index < 0) drawNextHangManElement()
         else showLetter(char)
+
+        val isHiddenLetter = tvWord.text.toString().indexOf('*') == -1
+        val isLastStage = stage == imgResources.size - 1
+        if (isHiddenLetter) win()
+        if (isLastStage) lose()
     }
 
     @SuppressLint("SetTextI18n")
