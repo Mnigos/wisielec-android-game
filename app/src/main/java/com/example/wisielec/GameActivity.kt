@@ -3,10 +3,9 @@ package com.example.wisielec
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 import kotlin.text.StringBuilder
 
 class GameActivity : AppCompatActivity() {
@@ -23,13 +22,14 @@ class GameActivity : AppCompatActivity() {
         R.drawable.ic_h9
     )
 
-    val chars = "abcdefghijklmnoprstuqwxyz"
+    private val chars = "abcdefghijklmnoprstuqwxyz"
     var stage = 0
     var end = false
     private lateinit var keyWord: String
     private lateinit var img: ImageView
     private lateinit var tvWord: TextView
     private lateinit var tvTmp: TextView
+    private lateinit var tableRow: TableRow
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,9 +51,27 @@ class GameActivity : AppCompatActivity() {
 
         val buttonThree = findViewById<Button>(R.id.btn_end_hma)
 
+        setButtons()
+
         buttonThree.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun setButtons() {
+        val tableLayout = findViewById<TableLayout>(R.id.tableLayout)
+
+        for (i in 0..chars.length) {
+            val char = chars[i]
+            val button = Button(this)
+            button.text = char.toString().toUpperCase(Locale.ROOT)
+            button.textSize = 20F
+            button.id = i
+            // @TODO: add letterAction method
+            button.setOnClickListener(letterAction(char))
+            tableRow = tableLayout.getChildAt(i / 5) as TableRow
+            tableRow.addView(button)
         }
     }
 }
