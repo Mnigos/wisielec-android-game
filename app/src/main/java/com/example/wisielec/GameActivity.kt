@@ -3,14 +3,13 @@ package com.example.wisielec
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.*
+import android.widget.* // ktlint-disable no-wildcard-imports
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
+import java.util.* // ktlint-disable no-wildcard-imports
 import kotlin.text.StringBuilder
 
 class GameActivity : AppCompatActivity() {
-    val imgResources = arrayOf(
+    private val imgResources = arrayOf(
         R.drawable.ic_h0,
         R.drawable.ic_h1,
         R.drawable.ic_h2,
@@ -69,7 +68,7 @@ class GameActivity : AppCompatActivity() {
             button.text = char.toString().toUpperCase(Locale.ROOT)
             button.textSize = 20F
             button.id = i
-            button.setOnClickListener{
+            button.setOnClickListener {
                 letterAction(char)
             }
             tableRow = tableLayout.getChildAt(i / 5) as TableRow
